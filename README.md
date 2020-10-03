@@ -1,6 +1,8 @@
 # Temp Files Eraser (v1.0.0)
 Windows console app which deletes temporary files and folders being left over in the system.
 
+![Screenshot](screenshot.png)
+
 ## Configuration
 Define a list of temporary folders paths in app.config which the app will go through.
 
