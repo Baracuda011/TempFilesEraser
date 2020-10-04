@@ -71,13 +71,20 @@ namespace TempFilesEraser
 		/// </summary>
 		/// <param name="dirs">List of folders (string[])</param>
 		/// <created>Nemanja Stankovic,03-Oct-20</created>
-		/// <changed>Nemanja Stankovic,03-Oct-20</changed>
+		/// <changed>Nemanja Stankovic,04-Oct-20</changed>
 		private static void DeleteDirectories(string[] dirs)
 		{
 			foreach ( var dir in dirs )
 			{
-				DeleteDirectory(dir);
-				Console.WriteLine($"{dir} ... deleted");
+				if ( Directory.Exists(dir) )
+				{
+					DeleteDirectory(dir);
+					Console.WriteLine($"{dir} ... deleted");
+				}
+				else
+				{
+					Console.WriteLine($"{dir} ... doesn't exist");
+				}
 			}
 		}
 
