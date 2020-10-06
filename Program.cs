@@ -71,7 +71,7 @@ namespace TempFilesEraser
 		/// </summary>
 		/// <param name="dirs">List of folders (string[])</param>
 		/// <created>Nemanja Stankovic,03-Oct-20</created>
-		/// <changed>Nemanja Stankovic,04-Oct-20</changed>
+		/// <changed>Nemanja Stankovic,06-Oct-20</changed>
 		private static void DeleteDirectories(string[] dirs)
 		{
 			foreach ( var dir in dirs )
@@ -79,7 +79,6 @@ namespace TempFilesEraser
 				if ( Directory.Exists(dir) )
 				{
 					DeleteDirectory(dir);
-					Console.WriteLine($"{dir} ... deleted");
 				}
 				else
 				{
@@ -93,13 +92,12 @@ namespace TempFilesEraser
 		/// </summary>
 		/// <param name="files">List of files (string[])</param>
 		/// <created>Nemanja Stankovic,03-Oct-20</created>
-		/// <changed>Nemanja Stankovic,03-Oct-20</changed>
+		/// <changed>Nemanja Stankovic,06-Oct-20</changed>
 		private static void DeleteFiles(string[] files)
 		{
 			foreach ( var file in files )
 			{
 				DeleteFile(file);
-				Console.WriteLine($"{file} ... deleted");
 			}
 
 			Console.WriteLine("");
@@ -110,9 +108,11 @@ namespace TempFilesEraser
 		/// </summary>
 		/// <param name="path">Folder path (string)</param>
 		/// <created>Nemanja Stankovic,03-Oct-20</created>
-		/// <changed>Nemanja Stankovic,03-Oct-20</changed>
+		/// <changed>Nemanja Stankovic,06-Oct-20</changed>
 		private static void DeleteDirectory(string path)
 		{
+			var noErrors = true;
+
 			try
 			{
 				// Deletes the selected folder.
@@ -121,12 +121,19 @@ namespace TempFilesEraser
 			catch ( IOException )
 			{
 				// Skips a locked folder.
+				noErrors = false;
 				Console.WriteLine($"{path} is being used by another process ... skipped");
 			}
 			catch ( UnauthorizedAccessException )
 			{
 				// Skips a locked folder.
+				noErrors = false;
 				Console.WriteLine($"{path} is being used by another process ... skipped");
+			}
+
+			if ( noErrors )
+			{
+				Console.WriteLine($"{path} ... deleted");
 			}
 		}
 
@@ -135,9 +142,11 @@ namespace TempFilesEraser
 		/// </summary>
 		/// <param name="path">File path (string)</param>
 		/// <created>Nemanja Stankovic,03-Oct-20</created>
-		/// <changed>Nemanja Stankovic,03-Oct-20</changed>
+		/// <changed>Nemanja Stankovic,06-Oct-20</changed>
 		private static void DeleteFile(string path)
 		{
+			var noErrors = true;
+
 			try
 			{
 				// Deletes the selected file.
@@ -146,12 +155,19 @@ namespace TempFilesEraser
 			catch ( IOException )
 			{
 				// Skips a locked file.
+				noErrors = false;
 				Console.WriteLine($"{path} is being used by another process ... skipped");
 			}
 			catch ( UnauthorizedAccessException )
 			{
 				// Skips a locked file.
+				noErrors = false;
 				Console.WriteLine($"{path} is being used by another process ... skipped");
+			}
+
+			if ( noErrors )
+			{
+				Console.WriteLine($"{path} ... deleted");
 			}
 		}
 	}
