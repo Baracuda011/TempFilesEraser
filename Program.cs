@@ -13,10 +13,10 @@ namespace TempFilesEraser
 	class Program
 	{
 		/// <summary>
-		/// Goes through all paths and deletes files and folders 
+		/// Goes through all paths and deletes files and folders
 		/// </summary>
 		/// <created>Nemanja Stankovic,03-Oct-20</created>
-		/// <changed>Nemanja Stankovic,03-Oct-20</changed>
+		/// <changed>Nemanja Stankovic,09-Nov-20</changed>
 		static void Main()
 		{
 			// Read predefined paths from the app configuration.
@@ -24,25 +24,28 @@ namespace TempFilesEraser
 
 			foreach ( var folder in tempFolders )
 			{
-				// Display the main notification message.
-				DisplayDeleteMessage(folder);
-
-				// Read all subfolders.
-				var dirs = Directory.GetDirectories(folder);
-
-				// Read all files.
-				var files = Directory.GetFiles(folder);
-
-				if ( dirs.Any() )
+				if ( Directory.Exists(folder) )
 				{
-					// Delete all existing subfolders.
-					DeleteDirectories(dirs);
-				}
+					// Display the main notification message.
+					DisplayDeleteMessage(folder);
 
-				if ( files.Any() )
-				{
-					// Delete all existing files.
-					DeleteFiles(files);
+					// Read all subfolders.
+					var dirs = Directory.GetDirectories(folder);
+
+					// Read all files.
+					var files = Directory.GetFiles(folder);
+
+					if ( dirs.Any() )
+					{
+						// Delete all existing subfolders.
+						DeleteDirectories(dirs);
+					}
+
+					if ( files.Any() )
+					{
+						// Delete all existing files.
+						DeleteFiles(files);
+					}
 				}
 			}
 
