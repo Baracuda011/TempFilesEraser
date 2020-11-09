@@ -1,4 +1,4 @@
-# Temp Files Eraser (v1.0.0)
+# Temp Files Eraser (v1.0.0.4)
 Windows console app which deletes temporary files and folders being left over in the system.
 
 ![Screenshot](screenshot.png)
